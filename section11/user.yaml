@@ -18,7 +18,7 @@ spec:
     spec:
       containers:                    #定义User容器，开放10086端口
         - name: user
-          image: aoho/user:<COMMIT_ID_TAG>
+          image: coollyj/user:<COMMIT_ID_TAG>
           ports:
             - containerPort: 10086
           imagePullPolicy: IfNotPresent

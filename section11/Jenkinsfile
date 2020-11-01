@@ -1,6 +1,4 @@
 node {
-
-
     script {
         mysql_addr = '127.0.0.1' // service cluster ip
         redis_addr = '127.0.0.1' // service cluster ip
@@ -15,17 +13,15 @@ node {
         }
     }
 
-
     stage('build image') {
         echo "second stage: build docker image"
-        sh "docker build -t aoho/user:${commit_id} section11/user/"
+        sh "docker build -t coollyj/user:${commit_id} section11/user/"
     }
-
 
     stage('push image') {
         echo "third stage: push docker image to registry"
-        sh "docker login -u aoho -p xxxxxx"
-        sh "docker push aoho/user:${commit_id}"
+        sh "docker login -u coollyj -p liu430922"
+        sh "docker push coollyj/user:${commit_id}"
     }
 
     stage('deploy to Kubernetes') {
@@ -35,7 +31,6 @@ node {
         sh "sed -i 's/<REDIS_ADDR_TAG>/${redis_addr}/' user-service.yaml"
         sh "kubectl apply -f user.yaml"
     }
-
 
     stage('http test') {
         echo "fifth stage: http test"
